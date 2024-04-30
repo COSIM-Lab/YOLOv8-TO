@@ -517,7 +517,7 @@ class v8SegmentationLoss(v8DetectionLoss):
 
                         # filtered_predictions = formatted_variables[i][:,fg_mask[i]]
                         filtered_predictions = formatted_variables
-                        pred_phi , H_phi = calc_Phi(filtered_predictions.T,LSgrid.to('cuda'))
+                        pred_phi , H_phi = calc_Phi(filtered_predictions.T,LSgrid.to(self.device))
                         if REG_LOSS == "level":
                             pred_phi= torch.reshape(pred_phi,(nely+1,nelx+1,H_phi.shape[-1]))
                             normalized = (pred_phi - pred_phi.min()) / (pred_phi.max() - pred_phi.min())
