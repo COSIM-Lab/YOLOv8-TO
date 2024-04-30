@@ -146,11 +146,6 @@ def run_model(model, image, conf=0.05, iou=0.5, imgsz=640):
     results = model(image, conf=conf, iou=iou, imgsz=imgsz)
     return results
 
-def save_results(results, filename='results.jpg'):
-    for r in results:
-        im_array = r.plot(boxes=True, labels=False, line_width=1)
-        im = Image.fromarray(im_array[..., ::-1])
-        im.save(filename)
 
 def process_results(results, input_image):
     diceloss = CustomDiceLoss()
