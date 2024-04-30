@@ -2,7 +2,9 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=python
 
 /datasets/
-
+.DS_Store
+__pycache__/
+*.pyc
 ### Python ###
 # Byte-compiled / optimized / DLL files
 __pycache__/
