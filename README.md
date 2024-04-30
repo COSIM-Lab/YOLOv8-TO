@@ -15,8 +15,16 @@ Brief description of what the project does and the problem it solves. Include a 
 ##  Reference
 This code aims to reproduce the results presented in the research article:
 
-> Author(s). (Year). Title. *Journal*, Volume(Issue), Pages. DOI
-
+```bibtex
+@misc{rochefortbeaudoin2024density,
+      title={From Density to Geometry: YOLOv8 Instance Segmentation for Reverse Engineering of Optimized Structures}, 
+      author={Thomas Rochefort-Beaudoin and Aurelian Vadean and Sofiane Achiche and Niels Aage},
+      year={2024},
+      eprint={2404.18763},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
+}
+```
 ## Installation
 
 ### Prerequisites
@@ -32,3 +40,17 @@ pip install -e .
 ## Datasets
 Links to the dataset on HuggingFace:
 - [YOLOv8-TO_Data](https://huggingface.co/datasets/tomrb/yolov8to_data)
+
+The Huggingface dataset contains the following datasets (see paper for details):
+- MMC
+- MMC-random
+- SIMP
+- SIMP_5%
+- OOD
+
+
+If you want to use one of the linked datasets, please unzip it inside of the datasets folder. Training labels are provided for the MMC and MMC-random data. To train on the data, please update the data.yaml file with the correct path to the dataset.
+```yaml
+path:  # dataset root dir
+```
+
