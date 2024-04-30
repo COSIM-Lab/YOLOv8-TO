@@ -1,5 +1,14 @@
 # YOLOv8-TO
 Code for the article "From Density to Geometry: YOLOv8 Instance Segmentation for Reverse Engineering of Optimized Structures"
+
+## Table of Contents
+- [Overview](#overview)
+- [Reference](#reference)
+- [Installation](#installation)
+  - [Prerequisites](#prerequisites)
+  - [Installing](#installing)
+- [Datasets](#datasets)
+
 ## Overview
 Brief description of what the project does and the problem it solves. Include a link or reference to the original article that inspired or is associated with this implementation.
 
@@ -21,4 +30,5 @@ cd YOLOv8-TO
 pip install -e .
 ```
 ## Datasets
-Links to the datasets:
+Links to the dataset on HuggingFace:
+- [YOLOv8-TO_Data](https://huggingface.co/datasets/tomrb/yolov8to_data)
