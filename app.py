@@ -37,7 +37,7 @@ description = "Upload an image and see the processed results. Adjust the confide
 iface = gr.Interface(
     fn=process_image,
     inputs=[
-        gr.Image(type='pil'),
+        gr.Image(type='pil',value ="https://huggingface.co/spaces/tomrb/YOLOv8-TO/resolve/main/test.png"),
         gr.Slider(minimum=0, maximum=1, value=0.1, label="Confidence Threshold"),
         gr.Slider(minimum=0, maximum=1, value=0.5, label="IOU Threshold")
     ],
