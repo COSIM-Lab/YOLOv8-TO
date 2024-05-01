@@ -5,7 +5,11 @@ sys.path.append('./utils')
 from yolo_utils import preprocess_image_pil, run_model, process_results, plot_results_gradio
 import matplotlib.pyplot as plt
 import io
-from ultralytics import YOLO
+try:
+    from ultralytics import YOLO
+except ImportError:
+    os.system('pip install -e ./yolov8-to')
+    from ultralytics import YOLO
 
 def process_image(image,conf,iou):
     model = YOLO('./trained_models/nano.pt')
