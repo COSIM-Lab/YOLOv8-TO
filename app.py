@@ -9,7 +9,7 @@ try:
     from ultralytics import YOLO
 except ImportError:
     import os
-    os.system('pip install -e ./yolov8-to')
+    os.system('pip install ./yolov8-to')
     from ultralytics import YOLO
 
 def process_image(image,conf,iou):
