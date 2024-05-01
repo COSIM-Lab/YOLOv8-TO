@@ -2,7 +2,12 @@ import torch
 import numpy as np
 import torch.nn.functional as F
 import torch.nn as nn
+from PIL import Image
+import io
+import matplotlib.pyplot as plt
+from matplotlib.colors import TwoSlopeNorm
 
+from PIL import Image
 
 class CustomTverskyLoss(nn.Module):
     def __init__(self, alpha=0.1, beta=0.9, size_average=True):
@@ -123,14 +128,6 @@ def calc_Phi(variable, LSgrid):
 
 
 # utils.py
-
-import torch
-import numpy as np
-from PIL import Image
-import matplotlib.pyplot as plt
-from matplotlib.colors import TwoSlopeNorm
-
-from PIL import Image
 
 def preprocess_image_pil(image, threshold_value=0.9, upscale=False, upscale_factor=2.0):
     # Ensure the image is in grayscale mode
@@ -257,11 +254,6 @@ def plot_results(input_image_array_tensor, seg_result, pred_Phi, sum_pred_H, fin
     
     fig.savefig(filename, dpi=600)
 
-
-import numpy as np
-from PIL import Image
-import io
-
 def plot_results_gradio(input_image_array_tensor, seg_result, pred_Phi, sum_pred_H, final_H, dice_loss, tversky_loss):
     nelx = input_image_array_tensor.shape[1] - 1
     nely = input_image_array_tensor.shape[0] - 1
@@ -284,9 +276,7 @@ def plot_results_gradio(input_image_array_tensor, seg_result, pred_Phi, sum_pred
     axes[1, 0].imshow(np.flipud(sum_pred_H.detach().numpy().reshape((nely+1, nelx+1), order='F')), origin='lower', cmap='gray_r')
     axes[1, 0].set_title('Prediction Projection')
     
-    plt.subplots_adjust(hspace=0.3, wspace=0.01)
-    plt.figtext(0.5, 0.05, f'Dice Loss: {dice_loss.item():.4f}', ha='center', fontsize=16)
-    
+    plt.subplots_adjust(hspace=0.3, wspace=0.01)    
     # Convert figure to a PIL Image
     buf = io.BytesIO()
     plt.savefig(buf, format='png')

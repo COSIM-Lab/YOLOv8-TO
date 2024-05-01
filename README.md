@@ -10,7 +10,11 @@ pinned: false
 
 
 # YOLOv8-TO
-Code for the article "From Density to Geometry: YOLOv8 Instance Segmentation for Reverse Engineering of Optimized Structures"
+Code for the paper:
+>  "From Density to Geometry: YOLOv8 Instance Segmentation for Reverse Engineering of Optimized Structures"
+
+- Read the paper: [arXiv](https://arxiv.org/abs/2404.18763).
+- Try it out here: [Demo](https://huggingface.co/spaces/tomrb/YOLOv8-TO)
 
 ## Table of Contents
 - [Overview](#overview)
@@ -26,7 +30,9 @@ Code for the article "From Density to Geometry: YOLOv8 Instance Segmentation for
 Brief description of what the project does and the problem it solves. Include a link or reference to the original article that inspired or is associated with this implementation.
 
 ## Demo
-Try it at:
+The nano version of the model is hosted on **Hugging Face Spaces**:
+
+- [Try the YOLOv8-TO Nano model with your own images!](https://huggingface.co/spaces/tomrb/YOLOv8-TO)
 
 ##  Reference
 This code aims to reproduce the results presented in the research article:
