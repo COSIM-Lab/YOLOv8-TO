@@ -10,7 +10,7 @@ try:
 except ImportError:
     import os
     os.system('pip install -e ./yolov8-to')
-    from ultralyticscustom import YOLO
+    from ultralytics import YOLO
 
 def process_image(image,conf,iou):
     model = YOLO('./trained_models/nano.pt')
