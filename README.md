@@ -1,6 +1,6 @@
 ---
-title: Demo Space
-emoji: 🤗
+title: YOLOv8-TO Demo
+emoji: 🏗️
 colorFrom: yellow
 colorTo: green
 sdk: gradio

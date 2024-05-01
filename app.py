@@ -32,7 +32,7 @@ def process_image(image,conf,iou):
 
 # Create the Gradio interface
 title = "YOLOV8-TO Demo App"
-description = "Upload an image and see the processed results. Adjust the confidence and IOU thresholds as needed."
+description = "Upload an image and see the processed results. Adjust the confidence and IOU thresholds as needed. Runs the YOLOv8-TO Nano model size. Runs on 2 CPU cores so please be patient!"
 
 iface = gr.Interface(
     fn=process_image,
