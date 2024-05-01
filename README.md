@@ -1,4 +1,15 @@
-# YOLOv8-TO (WORK IN PROGRESS)
+---
+title: Demo Space
+emoji: 🤗
+colorFrom: yellow
+colorTo: orange
+sdk: gradio
+app_file: app.py
+pinned: false
+---
+
+
+# YOLOv8-TO
 Code for the article "From Density to Geometry: YOLOv8 Instance Segmentation for Reverse Engineering of Optimized Structures"
 
 ## Table of Contents
@@ -8,9 +19,14 @@ Code for the article "From Density to Geometry: YOLOv8 Instance Segmentation for
   - [Prerequisites](#prerequisites)
   - [Installing](#installing)
 - [Datasets](#datasets)
+- [Training](#training)
+- [Inference](#inference)
 
 ## Overview
 Brief description of what the project does and the problem it solves. Include a link or reference to the original article that inspired or is associated with this implementation.
+
+## Demo
+Try it at:
 
 ##  Reference
 This code aims to reproduce the results presented in the research article:
@@ -54,3 +70,13 @@ If you want to use one of the linked datasets, please unzip it inside of the dat
 path:  # dataset root dir
 ```
 
+
+## Training
+
+To train the model, make sure the train dataset is setup according to the above section and according to the documentation from ultralytics:
+https://docs.ultralytics.com/datasets/
+
+Refer to the notebook `YOLOv8_TO.ipynb` for an example of how to train the model.
+
+## Inference
+Refer to the notebook `YOLOv8_TO.ipynb` for an example of how to perform inference with the trained model.

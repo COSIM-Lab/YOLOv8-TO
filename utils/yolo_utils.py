@@ -130,6 +130,25 @@ from PIL import Image
 import matplotlib.pyplot as plt
 from matplotlib.colors import TwoSlopeNorm
 
+from PIL import Image
+
+def preprocess_image_pil(image, threshold_value=0.9, upscale=False, upscale_factor=2.0):
+    # Ensure the image is in grayscale mode
+    if image.mode != 'L':
+        image = image.convert('L')
+
+    # Apply threshold
+    image = image.point(lambda x: 255 if x > threshold_value * 255 else 0, '1')
+    
+    # Upscale if requested
+    if upscale:
+        image = image.resize(
+            (int(image.width * upscale_factor), int(image.height * upscale_factor)),
+            resample=Image.BICUBIC
+        )
+    
+    return image
+
 def preprocess_image(image_path, threshold_value=0.9, upscale=False, upscale_factor=2.0):
     image = Image.open(image_path).convert('L')
     image = image.point(lambda x: 255 if x > threshold_value * 255 else 0, '1')
@@ -237,3 +256,41 @@ def plot_results(input_image_array_tensor, seg_result, pred_Phi, sum_pred_H, fin
     plt.figtext(0.5, 0.05, f'Dice Loss: {dice_loss.item():.4f}', ha='center', fontsize=16)
     
     fig.savefig(filename, dpi=600)
+
+
+import numpy as np
+from PIL import Image
+import io
+
+def plot_results_gradio(input_image_array_tensor, seg_result, pred_Phi, sum_pred_H, final_H, dice_loss, tversky_loss):
+    nelx = input_image_array_tensor.shape[1] - 1
+    nely = input_image_array_tensor.shape[0] - 1
+    fig, axes = plt.subplots(2, 2, figsize=(8, 8))
+    
+    axes[0, 0].imshow(input_image_array_tensor.squeeze(), origin='lower', cmap='gray_r')
+    axes[0, 0].set_title('Input Image')
+    axes[0, 0].axis('on')
+    
+    axes[0, 1].imshow(seg_result)
+    axes[0, 1].set_title('Segmentation Result')
+    axes[0, 1].axis('off')
+    
+    render_colors1 = ['yellow', 'g', 'r', 'c', 'm', 'y', 'black', 'orange', 'pink', 'cyan', 'slategrey', 'wheat', 'purple', 'mediumturquoise', 'darkviolet', 'orangered']
+    for i, color in zip(range(0, pred_Phi.shape[1]), render_colors1*100):
+        axes[1, 1].contourf(np.flipud(pred_Phi[:, i].numpy().reshape((nely+1, nelx+1), order='F')), [0, 1], colors=color)
+    axes[1, 1].set_title('Prediction contours')
+    axes[1, 1].set_aspect('equal')
+    
+    axes[1, 0].imshow(np.flipud(sum_pred_H.detach().numpy().reshape((nely+1, nelx+1), order='F')), origin='lower', cmap='gray_r')
+    axes[1, 0].set_title('Prediction Projection')
+    
+    plt.subplots_adjust(hspace=0.3, wspace=0.01)
+    plt.figtext(0.5, 0.05, f'Dice Loss: {dice_loss.item():.4f}', ha='center', fontsize=16)
+    
+    # Convert figure to a PIL Image
+    buf = io.BytesIO()
+    plt.savefig(buf, format='png')
+    plt.close(fig)
+    buf.seek(0)
+    img = Image.open(buf)
+    return img
