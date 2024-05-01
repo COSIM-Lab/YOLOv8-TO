@@ -32,12 +32,20 @@ def process_image(image,conf,iou):
 
 # Create the Gradio interface
 title = "YOLOV8-TO Demo App"
-description = "Upload an image and see the processed results. Adjust the confidence and IOU thresholds as needed. Runs the YOLOv8-TO Nano model size. Runs on 2 CPU cores so please be patient!"
+description = """
+- **Upload an image** and see the processed results. You can replace the default image with whatever you want to upload.
+- **Adjust the confidence and IOU thresholds** as needed.
+- Runs the **YOLOv8-TO Nano model size**.
+- **Runs on 2 CPU cores**, so please be patient!
+- For more details, check out the [GitHub repository](https://github.com/COSIM-Lab/YOLOv8-TO).
+- Learn more about the methodology in the related [research paper](https://arxiv.org/abs/2404.18763).
+"""
+
 
 iface = gr.Interface(
     fn=process_image,
     inputs=[
-        gr.Image(type='pil',value ="https://huggingface.co/spaces/tomrb/YOLOv8-TO/resolve/main/test.png"),
+        gr.Image(type='pil',value ="https://huggingface.co/spaces/tomrb/YOLOv8-TO/resolve/main/test.png", label="Input Image"),
         gr.Slider(minimum=0, maximum=1, value=0.1, label="Confidence Threshold"),
         gr.Slider(minimum=0, maximum=1, value=0.5, label="IOU Threshold")
     ],
