@@ -1,4 +1,3 @@
-import os
 import gradio as gr
 import sys
 sys.path.append('./utils')
@@ -9,6 +8,7 @@ import io
 try:
     from ultralytics import YOLO
 except ImportError:
+    import os
     os.system('pip install -e ./yolov8-to')
     from ultralytics import YOLO
 
