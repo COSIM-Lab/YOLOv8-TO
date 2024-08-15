@@ -56,7 +56,7 @@ This package comes with a fork of the ultralytics package in the yolov8-to direc
 
 ```bash
 git clone https://github.com/COSIM-Lab/YOLOv8-TO.git
-cd YOLOv8-TO
+cd YOLOv8-TO/yolov8-to
 pip install -e .
 ```
 ## Datasets
