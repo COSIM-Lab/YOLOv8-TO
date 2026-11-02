@@ -731,9 +731,9 @@ class Exporter:
         LOGGER.info(f'\n{prefix} starting export with Edge TPU compiler {ver}...')
         f = str(tflite_model).replace('.tflite', '_edgetpu.tflite')  # Edge TPU model
 
-        cmd = f'edgetpu_compiler -s -d -k 10 --out_dir "{Path(f).parent}" "{tflite_model}"'
-        LOGGER.info(f"{prefix} running '{cmd}'")
-        subprocess.run(cmd, shell=True)
+        cmd = ['edgetpu_compiler', '-s', '-d', '-k', '10', '--out_dir', str(Path(f).parent), str(tflite_model)]
+        LOGGER.info(f"{prefix} running {cmd!r}")
+        subprocess.run(cmd, check=True)
         self._add_tflite_metadata(f)
         return f, None
 
@@ -755,9 +755,10 @@ class Exporter:
         LOGGER.info(f'\n{prefix} output node names: {outputs}')
 
         with spaces_in_path(f_pb) as fpb_, spaces_in_path(f) as f_:  # exporter can not handle spaces in path
-            cmd = f'tensorflowjs_converter --input_format=tf_frozen_model --output_node_names={outputs} "{fpb_}" "{f_}"'
-            LOGGER.info(f"{prefix} running '{cmd}'")
-            subprocess.run(cmd, shell=True)
+            cmd = ['tensorflowjs_converter', '--input_format=tf_frozen_model', f'--output_node_names={outputs}',
+                   str(fpb_), str(f_)]
+            LOGGER.info(f"{prefix} running {cmd!r}")
+            subprocess.run(cmd, check=True)
 
         if ' ' in str(f):
             LOGGER.warning(f"{prefix} WARNING ⚠️ your model may not work correctly with spaces in path '{f}'.")

@@ -7,7 +7,9 @@ import os
 import platform
 import re
 import shutil
+import shlex
 import subprocess
+import sys
 import time
 from pathlib import Path
 from typing import Optional
@@ -286,7 +288,7 @@ def check_requirements(requirements=ROOT.parent / 'requirements.txt', exclude=()
             try:
                 t = time.time()
                 assert is_online(), 'AutoUpdate skipped (offline)'
-                LOGGER.info(subprocess.check_output(f'pip install --no-cache {s} {cmds}', shell=True).decode())
+                LOGGER.info(subprocess.check_output([sys.executable, "-m", "pip", "install", "--no-cache", *pkgs, *shlex.split(cmds)]).decode())
                 dt = time.time() - t
                 LOGGER.info(
                     f"{prefix} AutoUpdate success ✅ {dt:.1f}s, installed {n} package{'s' * (n > 1)}: {pkgs}\n"
@@ -485,7 +487,7 @@ def check_amp(model):
 def git_describe(path=ROOT):  # path must be a directory
     """Return human-readable git description, i.e. v5.0-5-g3e25f1e https://git-scm.com/docs/git-describe."""
     with contextlib.suppress(Exception):
-        return subprocess.check_output(f'git -C {path} describe --tags --long --always', shell=True).decode()[:-1]
+        return subprocess.check_output(['git', '-C', str(path), 'describe', '--tags', '--long', '--always']).decode().strip()
     return ''
 
 
