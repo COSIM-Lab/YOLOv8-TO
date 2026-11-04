@@ -270,7 +270,8 @@ def safe_download(url,
     """
 
     # Check if the URL is a Google Drive link
-    gdrive = 'drive.google.com' in url
+    parsed = parse.urlsplit(str(url))
+    gdrive = parsed.scheme in ('http', 'https') and parsed.hostname == 'drive.google.com'
     if gdrive:
         url, file = get_google_drive_file_info(url)
 
